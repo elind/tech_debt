@@ -1,0 +1,13 @@
+<p>
+  <b>Title:</b>
+  <%=h @tech_debt.title %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%=h @tech_debt.location %>
+</p>
+
+
+<%= link_to 'Edit', edit_tech_debt_path(@tech_debt) %> |
+<%= link_to 'Back', tech_debts_path %>

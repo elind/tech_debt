@@ -1,0 +1,20 @@
+<h1>Editing tech_debt</h1>
+
+<% form_for(@tech_debt) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @tech_debt %> |
+<%= link_to 'Back', tech_debts_path %>

@@ -1,0 +1,63 @@
+<h1>Listing tech_debts</h1>
+
+<% form_tag tech_debts_path, :method => :get do -%>
+	Keyword: <%= select_tag "keyword", 
+	               options_for_select([["All", "-"],
+	                                   ["Functional", "func"],
+	                                   ["Note", "note"],
+	                                   ["Stub", "stub"],
+	                                   ["Test", "test"]], @current_filter[:keyword]) %>
+	Newer than<%= select_tag "newer_than", 
+						               options_for_select([["All", "-"],
+						                                   ["1 day", "1"],
+						                                   ["3 days", "3"],
+						                                   ["7 days", "7"],
+						                                   ["2 weeks", "14"],
+					                                     ["1 month", "30"],
+					                                     ["1 year", "365"]], @current_filter[:newer_than]) %>
+	Older than<%= select_tag "older_than", 
+						               options_for_select([["All", "-"],
+						                                   ["1 day", "1"],
+						                                   ["3 days", "3"],
+						                                   ["7 days", "7"],
+						                                   ["2 weeks", "14"],
+					                                     ["1 month", "30"],
+					                                     ["1 year", "365"]], @current_filter[:older_than]) %>
+	Priority<%= select_tag "priority", 
+						             options_for_select([["All", "-"],
+						                                 ["1 or higher", "1"],
+						                                 ["2 or higher", "2"],
+						                                 ["3 or higher", "3"],
+						                                 ["4 or higher", "4"],
+					                                   ["5 or higher", "5"],
+					                                   ["6 or higher", "6"],
+					                                   ["7 or higher", "7"],
+					                                   ["8 or higher", "8"],
+					                                   ["9", "9"]], @current_filter[:priority]) %>
+  <%= submit_tag "Apply filter" %>
+<% end -%>
+
+<table>
+  <tr>
+    <th>Title</th>
+		<th>Keywords</th>
+    <th>Location</th>
+    <th>Reporter</th>
+    <th>Priority</th>
+    <th>Created</th>
+  </tr>
+
+<% for tech_debt in @tech_debts %>
+  <tr>
+    <td><%=h tech_debt.title %></td>
+    <td><%=h tech_debt.keywords.join(", ") if tech_debt.keywords %></td>
+    <td><%=h tech_debt.location %></td>
+    <td><%=h tech_debt.reporter %></td>
+    <td><%=h tech_debt.priority %></td>
+    <td><%=h tech_debt.created_at %></td>
+    <td><%= link_to 'Show', tech_debt %></td>
+    <td><%= link_to 'Edit', edit_tech_debt_path(tech_debt) %></td>
+    <td><%= link_to 'Destroy', tech_debt, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>

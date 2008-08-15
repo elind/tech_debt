@@ -1,0 +1,74 @@
+TechDebt
+========
+
+What is technical debt?
+-----------------------
+
+I will write this later /Erik
+
+Usage
+=======
+
+1. Create migration:
+
+   >> ./script/generate tech_debts_migration
+
+2. Run migration:
+
+   >> rake db:migrate
+
+3. Make a TechDebt note in any Ruby file in the app or test folders.
+
+   ## td test: Missing test for invalid parameters // Erik
+
+4. Extract TechDebts
+
+	 >> rake tech_debt:extract
+
+5. Add the following line to config/routes.rb
+
+   map.resources :tech_debts
+
+6. Copy the vendor/plugins/techdebt/views/tech_debts folder to app/views
+
+7. Administer the TechDebts in the GUI on the GET /tech_debts path.
+
+Available Rake tasks
+====================
+
+tech_debt:extract
+Extract all tech debts and create TechDebt instances for them.
+
+tech_debt:show
+Show all existing TechDebt notes.
+
+Bash scripts
+============
+
+If you want a quick commandline summary of current tech debts these bash
+scripts are kindly provided by Joel Hansson. They require a Unix-like
+plattform.
+
+notes.sh
+--------
+#!/bin/bash
+find app/ -type f -name "*.rb" -exec show_notes.sh {} \;
+
+show_notes.sh
+-------------
+#!/bin/bash
+me=$0
+file=$1
+resp=`grep '## td' $file`
+if [ "$resp" != "" ];then
+	echo "$file"
+	grep -n '## td' $file
+fi
+
+Contributors
+============
+Erik Lindblad
+Joel Hansson
+Jonathan Bourque Olivegren
+
+Copyright (c) 2008 Erik Lindblad, released under the MIT license
