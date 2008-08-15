@@ -9,7 +9,7 @@ class TechDebtsController < ApplicationController
     scope = scope.td_conditions "tech_debts.keywords LIKE ?", "%#{params[:keyword]}%" unless params[:keyword].nil? or params[:keyword] == "-"
     scope = scope.td_conditions "tech_debts.created_at > ?", params[:newer_than].to_i.days.ago.to_s(:db) unless params[:newer_than].nil? or params[:newer_than] == "-"
     scope = scope.td_conditions "tech_debts.created_at < ?", params[:older_than].to_i.days.ago.to_s(:db) unless params[:older_than].nil? or params[:older_than] == "-"
-    scope = scope.td_conditions "tech_debts.priority >= ?", params[:priority] unless params[:priority].nil? or params[:older_than] == "-"
+    scope = scope.td_conditions "tech_debts.priority >= ?", params[:priority] unless params[:priority].nil? or params[:priority] == "-"
 
     @current_filter = {:keyword => params[:keyword],
                        :newer_than => params[:newer_than],
